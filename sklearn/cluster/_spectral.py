@@ -19,20 +19,27 @@ from ._kmeans import k_means
 
 
 def cluster_qr(vectors):
-    """Search for a partition matrix (clustering) which is
-    closest to the eigenvector embedding.
+    """Search for a partition matrix closest to the eigenvector embedding.
+
+    This implementation was proposed in [1]_.  See also
+    https://github.com/asdamle/QR-spectral-clustering.
+
     Parameters
     ----------
     vectors : array-like, shape: (n_samples, n_clusters)
         The embedding space of the samples.
+
     Returns
     -------
     labels : array of integers, shape: n_samples
         The labels of the clusters.
+
     References
     ----------
-    https://github.com/asdamle/QR-spectral-clustering
-    https://arxiv.org/abs/1708.07481
+
+    .. [1] `Simple, direct, and efficient multi-way spectral clustering, 2019
+        Anil Damle, Victor Minden, Lexing Ying
+        <https://doi.org/10.1093/imaiai/iay008>`_
     """
 
     from scipy.linalg import qr, svd
