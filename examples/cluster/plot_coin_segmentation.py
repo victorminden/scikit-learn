@@ -65,7 +65,9 @@ eps = 1e-6
 graph.data = np.exp(-beta * graph.data / graph.data.std()) + eps
 
 # Apply spectral clustering (this step goes much faster if you have pyamg
-# installed)
+# installed and use EIGEN_SOLVER = 'amg').  However, any valid solver can 
+# be used (e.g., 'arpack', 'lobpcg', or 'amg').
+EIGEN_SOLVER = 'arpack'
 
 # The actual number of regions in this example is 27: background and 26 coins
 N_REGIONS = 26
@@ -73,7 +75,6 @@ N_REGIONS = 26
 # %%
 # Compute and visualize the resulting regions
 
-# Any eigen_solver: 'arpack', 'lobpcg', 'amg' can be used. AMG is usually best
 # It often helps the spectral clustering to compute a few extra eigenvectors
 N_REGIONS_PLUS = 3
 
@@ -82,7 +83,7 @@ for assign_labels in ('kmeans', 'discretize', 'cluster_qr'):
     labels = spectral_clustering(graph,
                                  n_clusters=(N_REGIONS + N_REGIONS_PLUS),
                                  assign_labels=assign_labels, random_state=42,
-                                 eigen_solver='arpack')
+                                 eigen_solver=EIGEN_SOLVER)
     t1 = time.time()
     labels = labels.reshape(rescaled_coins.shape)
 
