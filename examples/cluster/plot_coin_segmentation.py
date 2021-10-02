@@ -18,7 +18,6 @@ There are three options to assign labels:
   space using a cluster_qr algorithm,
 * whereas 'discrete' will iteratively search for the closest partition
   space to the embedding space.
-
 """
 print(__doc__)
 
